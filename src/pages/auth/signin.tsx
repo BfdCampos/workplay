@@ -61,17 +61,9 @@ export default function SignIn({
             </Stack>
 
             {process.env.NODE_ENV !== 'production' && (
-              <Button
-                onClick={() =>
-                  signIn('credentials', {
-                    callbackUrl: (callbackUrl as string) || '/',
-                  })
-                }
-                variant="ghost"
-                size="sm"
-              >
-                Dev Login
-              </Button>
+              <Text fontSize="xs" color="gray.500" mt={4}>
+                Use the Dev Sign in menu in the header to sign in as a test user
+              </Text>
             )}
           </VStack>
         </Container>
