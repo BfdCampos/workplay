@@ -26,7 +26,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ showUserName }) => {
     return isDevLoginEnabled ? (
       <DevUserMenu />
     ) : (
-      <Button isLoading={isLoading} as="a" href="/api/auth/signin" size="sm" variant="subtle" colorScheme="grey">
+      <Button isLoading={isLoading} as="a" href="/auth/signin" size="sm" variant="subtle" colorScheme="grey">
         Sign in
       </Button>
     );

@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import useSeasonMedals from '@/lib/useSeasonMedals';
-import type { CSSObject } from '@chakra-ui/react';
-import { Box, keyframes, styled, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Text, Tooltip } from '@chakra-ui/react';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 import type { Medal as DBMedal, Season } from '@prisma/client';
 import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';

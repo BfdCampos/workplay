@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
                 letterSpacing="tight"
                 color="grey.12"
               >
-                wrkplay
+                workplay
               </Box>
             </HStack>
           </Link>

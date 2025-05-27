@@ -9,6 +9,7 @@ import type { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
 import SlackProvider from 'next-auth/providers/slack';
 
 const providers = [];
@@ -28,6 +29,20 @@ if (process.env.NODE_ENV !== 'production') {
 
         return loggedUser;
       },
+    })
+  );
+}
+
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  providers.push(
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "select_account"
+        }
+      }
     })
   );
 }
@@ -58,6 +73,9 @@ export const nextAuthOptions: NextAuthOptions = {
   session: {
     maxAge: SESSION_MAX_AGE,
   },
+  pages: {
+    signIn: '/auth/signin',
+  },
   callbacks: {
     session({ session, user }) {
       return {
@@ -72,6 +90,23 @@ export const nextAuthOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       if ((user as User).roleId === BANNED_ROLE_ID) return false;
       if ((user as User).roleId === GUEST_ROLE_ID && account) await turnGuestToUser(user, account);
+
+      // Handle Google sign-in
+      if (account?.provider === 'google') {
+        // User info is already provided by Google OAuth, no need for additional API calls
+        try {
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { 
+              name: user.name || user.email?.split('@')[0],
+              image: user.image,
+              email: user.email!, // Google always provides email
+            },
+          });
+        } catch (error) {
+          console.warn(`⚠️ Failed to update user information for user ${user.id}`, error);
+        }
+      }
 
       if (account?.provider === 'slack') {
         try {

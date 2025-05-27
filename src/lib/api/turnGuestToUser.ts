@@ -19,7 +19,10 @@ const turnGuestToUser = async (user: User, account: Account) => {
     console.error(error);
     throw error;
   }
-  notifyNewcomer({ providerAccountId: account.providerAccountId, name: user.name, image: user.image });
+  // Only notify Slack channel if it's a Slack user
+  if (account.provider === 'slack') {
+    notifyNewcomer({ providerAccountId: account.providerAccountId, name: user.name, image: user.image });
+  }
 };
 
 export default turnGuestToUser;

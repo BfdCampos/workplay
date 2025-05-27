@@ -77,9 +77,9 @@ const PlayersBlock: React.FC<PlayersBlockProps> = ({ players }) => {
       </Section>
       {!isLoggedIn && (
         <VStack transform="translateY(-50%)" mt={-4} position="relative" zIndex="2" gridColumn="1/-1">
-          <Link href="/api/auth/signin" passHref>
+          <Link href="/auth/signin" passHref>
             <Button as="a" variant="primary" size="lg" m={3}>
-              Sign in with Slack
+              Sign in to play
             </Button>
           </Link>
         </VStack>
