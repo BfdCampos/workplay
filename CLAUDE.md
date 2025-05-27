@@ -5,6 +5,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 wrkplay is a gamification platform for office games (ping pong, pool, etc.) that tracks performance, maintains leaderboards, and awards medals. It integrates with Slack for authentication and match notifications.
 
+## Important: Brainstorming Folder
+The `/brainstorm/` folder is git-ignored and contains our feature planning and architectural decisions. **ALWAYS check this folder** when working on features to understand:
+- Core principles and vision
+- Architectural decisions
+- User flows and requirements
+- Pricing and monetization strategy
+- Implementation priorities
+
+Key documents:
+- `user-management-and-office-concepts.md` - Multi-community architecture
+- `pricing-strategy.md` - Pricing tiers and limits
+- `tournaments-and-seasons.md` - Gamification features
+- Check `README.md` in the brainstorm folder for full index
+
 ## Development Commands
 
 ### Initial Setup
