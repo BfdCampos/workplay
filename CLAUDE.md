@@ -43,7 +43,7 @@ yarn analyse             # Analyze bundle size
 ### Tech Stack
 - **Framework**: Next.js 12 with Pages Router (not App Router)
 - **Database**: PostgreSQL + Prisma ORM
-- **Auth**: NextAuth.js with Slack OAuth (dev mode available)
+- **Auth**: NextAuth.js with Google OAuth (primary), Slack OAuth (optional), dev mode available
 - **UI**: Chakra UI v2 + Emotion CSS-in-JS
 - **State**: React Query (Tanstack Query) + Jotai
 - **Testing**: Jest + React Testing Library + Cypress
@@ -65,6 +65,11 @@ yarn analyse             # Analyze bundle size
 ### Environment Variables
 Key variables in `.env`:
 - `NEXTAUTH_URL`: Auth callback URL
+- `NEXTAUTH_SECRET`: Required for NextAuth session encryption
+- `GOOGLE_CLIENT_ID`: Google OAuth client ID (primary auth method)
+- `GOOGLE_CLIENT_SECRET`: Google OAuth client secret
+- `SLACK_CLIENT_ID`: Slack OAuth (optional, for backward compatibility)
+- `SLACK_CLIENT_SECRET`: Slack OAuth (optional)
 - `SLACK_BOT_TOKEN`: For Slack notifications
 - `NEXT_PUBLIC_ENABLE_DEV_LOGIN`: Enable dev login button
 - `ENABLE_SLACK_MATCH_NOTIFICATION`: Toggle match notifications
@@ -72,7 +77,7 @@ Key variables in `.env`:
 
 ### Database Schema
 Main models in Prisma:
-- `User`: Players with Slack integration
+- `User`: Players with Google/Slack/GitHub authentication
 - `Office`: Physical office locations
 - `Game`: Game types (pool, ping pong, etc.)
 - `Match`: Game results with PlayerScores
@@ -84,3 +89,13 @@ Main models in Prisma:
 - Integration tests for API endpoints
 - E2E tests for critical user flows
 - Run single test: `yarn test path/to/file.spec.ts`
+
+### Authentication Notes (Updated)
+- **Primary Auth**: Google OAuth is now the default authentication method
+- **Custom Sign-in Page**: `/auth/signin` with Google sign-in prominently displayed
+- **Account Selection**: Google auth configured to always show account picker
+- **Backward Compatibility**: Slack OAuth still supported but no longer primary
+- **Dev Mode**: Dev login available via header menu, with "Normal sign in" option
+- **Image Domains**: Google profile images from `lh3.googleusercontent.com` are allowed
+- **User Creation**: Same role structure maintained for all auth providers
+- **Slack Features**: Notifications only sent for Slack-authenticated users
