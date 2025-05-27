@@ -35,7 +35,7 @@ export default function SignIn({
           <VStack spacing={8}>
             <Logo />
             <VStack spacing={3}>
-              <Heading size="xl">Welcome to wrkplay</Heading>
+              <Heading size="xl">Welcome to workplay</Heading>
               <Text color="gray.600" _dark={{ color: 'gray.400' }}>
                 Sign in to track your office game performance
               </Text>
