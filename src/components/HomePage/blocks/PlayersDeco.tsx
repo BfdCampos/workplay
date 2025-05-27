@@ -1,5 +1,6 @@
 import PlayerAvatar from '@/components/shared/PlayerAvatar';
-import { Box, keyframes } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import { keyframes } from '@emotion/react';
 import type { User } from '@prisma/client';
 import { useMemo } from 'react';
 

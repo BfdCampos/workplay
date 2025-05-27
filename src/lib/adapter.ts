@@ -5,10 +5,10 @@ import notifyNewcomer from './slack/notifyNewcomer';
 import { hasProp } from './types/utils';
 
 const PrismaAdapter = (prisma: PrismaClient): Adapter => ({
-  createUser: user => prisma.user.create({ data: { ...user, role: { connect: { id: USER_ROLE_ID } } } }),
-  getUser: id => prisma.user.findUnique({ where: { id } }),
-  getUserByEmail: email => prisma.user.findUnique({ where: { email } }),
-  async getUserByAccount(provider_providerAccountId) {
+  createUser: (user: any) => prisma.user.create({ data: { ...user, role: { connect: { id: USER_ROLE_ID } } } }),
+  getUser: (id: string) => prisma.user.findUnique({ where: { id } }),
+  getUserByEmail: (email: string) => prisma.user.findUnique({ where: { email } }),
+  async getUserByAccount(provider_providerAccountId: any) {
     const account = await prisma.account.findUnique({
       where: { provider_providerAccountId },
       select: { user: true },
@@ -17,14 +17,17 @@ const PrismaAdapter = (prisma: PrismaClient): Adapter => ({
   },
   updateUser: data => prisma.user.update({ where: { id: data.id }, data }),
   deleteUser: id => prisma.user.delete({ where: { id } }),
-  linkAccount: async account => {
+  linkAccount: async (account: any) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { state, ok, ...data } = account;
     await prisma.account.create({ data });
-    const user = await prisma.user.findUnique({ where: { id: account.userId }, select: { name: true, image: true } });
-    notifyNewcomer({ providerAccountId: account.providerAccountId, name: user?.name, image: user?.image });
+    // Only notify Slack for Slack users
+    if (account.provider === 'slack') {
+      const user = await prisma.user.findUnique({ where: { id: account.userId }, select: { name: true, image: true } });
+      notifyNewcomer({ providerAccountId: account.providerAccountId, name: user?.name, image: user?.image });
+    }
   },
-  unlinkAccount: async provider_providerAccountId => {
+  unlinkAccount: async (provider_providerAccountId: any) => {
     await prisma.account.delete({ where: { provider_providerAccountId } });
   },
   async getSessionAndUser(sessionToken) {
