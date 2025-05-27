@@ -67,7 +67,7 @@ const nextConfig = {
   images: {
     deviceSizes: [768, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    domains: ['avatars.slack-edge.com', 'secure.gravatar.com', 'cloudflare-ipfs.com'],
+    domains: ['avatars.slack-edge.com', 'secure.gravatar.com', 'cloudflare-ipfs.com', 'lh3.googleusercontent.com'],
     formats: ['image/avif', 'image/webp'],
   },
   compiler: {

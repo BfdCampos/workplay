@@ -42,12 +42,20 @@ SLACK_CLIENT_SECRET=your-slack-client-secret
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project or select existing
-3. Enable Google+ API
-4. Create OAuth 2.0 credentials
-5. Add authorized redirect URIs:
-   - Development: `http://localhost:3000/api/auth/callback/google`
-   - Production: `https://yourdomain.com/api/auth/callback/google`
-6. Copy Client ID and Client Secret to `.env.local`
+3. Go to "APIs & Services" > "Credentials"
+4. Click "Create Credentials" > "OAuth client ID"
+5. Select "Web application" as the application type
+6. Add authorized JavaScript origins:
+   - `http://localhost:3000`
+7. Add authorized redirect URIs:
+   - `http://localhost:3000/api/auth/callback/google`
+8. Click "Create"
+9. Copy the Client ID and Client Secret
+10. Update your `.env.local` file with the real values:
+    ```
+    GOOGLE_CLIENT_ID=your-actual-client-id.apps.googleusercontent.com
+    GOOGLE_CLIENT_SECRET=your-actual-client-secret
+    ```
 
 ## Testing
 
