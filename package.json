@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma migrate deploy && next build",
     "start": "next start",
     "analyse": "ANALYSE=true pnpm build",
     "test": "jest --testPathPattern=/src/",
@@ -20,7 +20,7 @@
     "db:migrate:prev": "dotenv -e .env.preview prisma migrate deploy",
     "db:migrate:prod": "dotenv -e .env.production prisma migrate deploy",
     "prepare": "husky install",
-    "postinstall": "pnpm chakra-ts",
+    "postinstall": "pnpm chakra-ts && prisma generate",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test dev http://localhost:3000 cypress",
