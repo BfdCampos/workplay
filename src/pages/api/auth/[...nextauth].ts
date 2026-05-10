@@ -93,14 +93,19 @@ export const nextAuthOptions: NextAuthOptions = {
 
       // Handle Google sign-in
       if (account?.provider === 'google') {
+        const adminEmail = process.env.ADMIN_EMAIL?.toLowerCase();
+        const isAdmin = !!adminEmail && user.email?.toLowerCase() === adminEmail;
+        const pinnedRoleId = isAdmin ? 0 : 1;
+
         // User info is already provided by Google OAuth, no need for additional API calls
         try {
           await prisma.user.update({
             where: { id: user.id },
-            data: { 
+            data: {
               name: user.name || user.email?.split('@')[0],
               image: user.image,
               email: user.email!, // Google always provides email
+              roleId: pinnedRoleId,
             },
           });
         } catch (error) {
