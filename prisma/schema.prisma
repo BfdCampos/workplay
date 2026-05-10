@@ -46,6 +46,13 @@ model User {
 
   boastId String?
   boast   Medal?  @relation("boast", fields: [boastId], references: [id])
+
+  isFake  Boolean @default(false)
+}
+
+model DemoState {
+  id          Int @id @default(0)
+  signupCount Int @default(0)
 }
 
 model Session {
