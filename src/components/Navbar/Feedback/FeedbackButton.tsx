@@ -11,7 +11,7 @@ const FeedbackButton: FCC<FeedbackButtonProps> = () => {
     <ModalButton
       data-testid="feedback-button"
       bg="transparent"
-      modalTitle="How are you enjoying wrkplay?"
+      modalTitle="How are you enjoying workplay?"
       Form={FeedbackForm}
       sx={{ aspectRatio: { base: '1', md: 'initial' } }}
     >

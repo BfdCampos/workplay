@@ -10,7 +10,7 @@ interface SEOProps {
 }
 
 const TERMS = {
-  title: 'wrkplay',
+  title: 'workplay',
   baseURL: process.env.VERCEL_URL,
 };
 

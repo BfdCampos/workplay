@@ -5,7 +5,7 @@ import Image from 'next/image';
 const Logo: ChakraComponent<'div'> = props => {
   return (
     <Box {...props}>
-      <Image src="/wrkplay-icon.png" width="100" height="100" alt="wrkplay" unoptimized />
+      <Image src="/wrkplay-icon.png" width="100" height="100" alt="workplay" unoptimized />
     </Box>
   );
 };

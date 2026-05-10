@@ -16,7 +16,7 @@ class MyDocument extends Document {
 
           {/* WEB APP */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-title" content="wrkplay" />
+          <meta name="apple-mobile-web-app-title" content="workplay" />
 
           <link rel="icon" href="/favicon.png" />
           <link rel="apple-touch-icon" href="/pwa.png" />

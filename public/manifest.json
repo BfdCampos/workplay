@@ -1,6 +1,6 @@
 {
-  "name": "wrkplay",
-  "short_name": "wrkplay",
+  "name": "workplay",
+  "short_name": "workplay",
   "icons": [
     {
       "src": "/pwa.png",
