@@ -25,7 +25,7 @@ const GAMES = [
 const FAKE_USER_COUNT = 60;
 const MATCHES_PER_GAME = 22;
 
-const dicebearAvatar = seed => `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(seed)}`;
+const dicebearAvatar = seed => `https://api.dicebear.com/9.x/personas/png?seed=${encodeURIComponent(seed)}`;
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const pick = arr => arr[Math.floor(Math.random() * arr.length)];
