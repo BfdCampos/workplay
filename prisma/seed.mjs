@@ -64,18 +64,6 @@ async function seedRoles() {
   });
 }
 
-async function seedAdmin() {
-  return prisma.user.create({
-    data: {
-      name: 'Bruno Campos',
-      email: ADMIN_EMAIL,
-      image: dicebearAvatar('Bruno Campos'),
-      roleId: 0,
-      isFake: false,
-    },
-  });
-}
-
 async function seedFakeUsers() {
   const users = [];
   const seenEmails = new Set();
@@ -252,8 +240,6 @@ async function seed() {
   await wipe();
   console.log('🪪 Seeding roles...');
   await seedRoles();
-  console.log('👑 Seeding admin...');
-  const admin = await seedAdmin();
   console.log(`👥 Seeding ${FAKE_USER_COUNT} fake users...`);
   const fakeUsers = await seedFakeUsers();
   console.log('🏢 Seeding offices and games...');
@@ -266,10 +252,10 @@ async function seed() {
   await prisma.demoState.create({ data: { id: 0, signupCount: 0 } });
 
   console.log(`\nDatabase seeded:`);
-  console.log(`  Admin:    ${admin.email}`);
+  console.log(`  Admin:    will be assigned to ${ADMIN_EMAIL} on first sign-in`);
   console.log(`  Offices:  ${offices.length}`);
   console.log(`  Games:    ${games.length}`);
-  console.log(`  Users:    ${fakeUsers.length} fake + 1 admin`);
+  console.log(`  Users:    ${fakeUsers.length} fake`);
   console.log(`  Matches:  ${matchCount}`);
   console.log(`  Scores:   ${scoreCount}`);
 }
