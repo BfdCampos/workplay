@@ -120,8 +120,6 @@ async function seedSeasons(games) {
     closedEnd.setDate(closedEnd.getDate() - 31);
     const activeStart = new Date(now);
     activeStart.setDate(activeStart.getDate() - 30);
-    const activeEnd = new Date(now);
-    activeEnd.setDate(activeEnd.getDate() + 60);
 
     const closed = await prisma.season.create({
       data: {
@@ -138,7 +136,7 @@ async function seedSeasons(games) {
         name: 'Summer 2026',
         slug: 'summer-2026',
         startDate: activeStart,
-        endDate: activeEnd,
+        endDate: null,
         gameid: game.id,
         colour: '#ffb454',
       },
