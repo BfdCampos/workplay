@@ -20,7 +20,7 @@ async function seed() {
     const name = [faker.name.firstName(), faker.name.lastName()].join(' ');
     return {
       name,
-      email: name.toLowerCase().replace(/ /g, '.') + '@wrkplay.app',
+      email: name.toLowerCase().replace(/ /g, '.') + '@workplay.app',
       image: faker.image.avatar(),
       roleId: 1,
     };
