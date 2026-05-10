@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import type { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import type { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { hasKey, hasProp } from './types/utils';
 
 declare global {

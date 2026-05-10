@@ -4,7 +4,7 @@ import revalidateStaticPages from '@/lib/revalidateStaticPages';
 import { canViewDashboard } from '@/lib/roles';
 import type { APIResponse } from '@/lib/types/api';
 import { nextAuthOptions } from '@/pages/api/auth/[...nextauth]';
-import type { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import type { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { withSentry } from '@sentry/nextjs';
 import type { NextApiHandler } from 'next';
 import { unstable_getServerSession } from 'next-auth';
