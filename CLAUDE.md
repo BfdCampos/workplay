@@ -11,7 +11,7 @@ Allowed types: `feat`, `fix`, `bug`, `chore`, `refactor`, `style`, `docs`, `test
 Keep the subject concise; if more context is needed, add it in the commit body.
 
 ## Project Overview
-wrkplay is a gamification platform for office games (ping pong, pool, etc.) that tracks performance, maintains leaderboards, and awards medals. It integrates with Slack for authentication and match notifications.
+workplay is a gamification platform for office games (ping pong, pool, etc.) that tracks performance, maintains leaderboards, and awards medals. It integrates with Slack for authentication and match notifications.
 
 ## Development Commands
 

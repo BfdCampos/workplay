@@ -1,6 +1,6 @@
 # Google Authentication Setup
 
-This branch implements Google OAuth authentication as the primary sign-in method for wrkplay, replacing Slack authentication.
+This branch implements Google OAuth authentication as the primary sign-in method for workplay, replacing Slack authentication.
 
 ## Changes Made
 
