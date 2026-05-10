@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Commit Conventions
+
+Commit messages follow the pattern `type: short single-sentence description`, all lower case after the colon.
+
+Allowed types: `feat`, `fix`, `bug`, `chore`, `refactor`, `style`, `docs`, `test`.
+
+Keep the subject concise; if more context is needed, add it in the commit body.
+
 ## Project Overview
 wrkplay is a gamification platform for office games (ping pong, pool, etc.) that tracks performance, maintains leaderboards, and awards medals. It integrates with Slack for authentication and match notifications.
 
