@@ -80,8 +80,8 @@ async function seedFakeUsers() {
   const users = [];
   const seenEmails = new Set();
   while (users.length < FAKE_USER_COUNT) {
-    const first = faker.person.firstName();
-    const last = faker.person.lastName();
+    const first = faker.name.firstName();
+    const last = faker.name.lastName();
     const name = `${first} ${last}`;
     const email = `${first}.${last}.${users.length}`.toLowerCase().replace(/[^a-z0-9.]/g, '') + '@workplay.demo';
     if (seenEmails.has(email)) continue;
