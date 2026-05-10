@@ -1,8 +1,7 @@
 import { BANNED_ROLE_ID, PAGE_SIZE } from '@/constants';
 import prisma from '@/lib/prisma';
 import type { APIResponse } from '@/lib/types/api';
-import type { Prisma } from '@prisma/client';
-import type { Match } from '@prisma/client';
+import type { Match, Prisma } from '@prisma/client';
 import { withSentry } from '@sentry/nextjs';
 import type { NextApiHandler } from 'next';
 import type { InferType} from 'yup';
