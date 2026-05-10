@@ -71,6 +71,11 @@ const Navbar: React.FC = () => {
                 color="grey.12"
               >
                 workplay
+                {process.env.NEXT_PUBLIC_DEMO === 'true' && (
+                  <Box as="span" ml={1.5} fontWeight="normal" opacity={0.5} fontSize="sm">
+                    · demo
+                  </Box>
+                )}
               </Box>
             </HStack>
           </Link>
