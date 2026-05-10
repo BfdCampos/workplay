@@ -4,8 +4,47 @@ import type { Adapter } from 'next-auth/adapters';
 import notifyNewcomer from './slack/notifyNewcomer';
 import { hasProp } from './types/utils';
 
+const RESET_EVERY = 3;
+
+async function resetDemoIfDue(prisma: PrismaClient) {
+  const adminEmail = process.env.ADMIN_EMAIL?.toLowerCase();
+  if (!adminEmail) return;
+
+  const state = await prisma.demoState.upsert({
+    where: { id: 0 },
+    create: { id: 0, signupCount: 1 },
+    update: { signupCount: { increment: 1 } },
+  });
+  if (state.signupCount % RESET_EVERY !== 0) return;
+
+  const realUsers = await prisma.user.findMany({
+    where: { isFake: false, email: { not: adminEmail } },
+    select: { id: true },
+  });
+  const realIds = realUsers.map(u => u.id);
+
+  if (realIds.length > 0) {
+    await prisma.match.deleteMany({
+      where: {
+        OR: [
+          { left: { some: { id: { in: realIds } } } },
+          { right: { some: { id: { in: realIds } } } },
+        ],
+      },
+    });
+    await prisma.playerScore.deleteMany({ where: { playerid: { in: realIds } } });
+    await prisma.feedback.deleteMany({ where: { playerid: { in: realIds } } });
+    await prisma.user.deleteMany({ where: { id: { in: realIds } } });
+  }
+
+  await prisma.demoState.update({ where: { id: 0 }, data: { signupCount: 0 } });
+}
+
 const PrismaAdapter = (prisma: PrismaClient): Adapter => ({
-  createUser: (user: any) => prisma.user.create({ data: { ...user, role: { connect: { id: USER_ROLE_ID } } } }),
+  createUser: async (user: any) => {
+    await resetDemoIfDue(prisma);
+    return prisma.user.create({ data: { ...user, role: { connect: { id: USER_ROLE_ID } } } });
+  },
   getUser: (id: string) => prisma.user.findUnique({ where: { id } }),
   getUserByEmail: (email: string) => prisma.user.findUnique({ where: { email } }),
   async getUserByAccount(provider_providerAccountId: any) {
